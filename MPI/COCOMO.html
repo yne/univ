@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>COCOMO II Calculator</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+	</head>
+	<body onload="loadForm()">
+		<div    id="page" class="container">
+			<form class="form" onsubmit="return false;">
+			<div id="EM" class="col-sm-6"></div>
+			<div id="SF" class="col-sm-6"></div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">A&nbsp;:</label>
+					<div class="col-sm-10">
+						<input name="a" class="form-control" onchange="show_cocomo()" value="2.94"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Size&nbsp;:</label>
+					<div class="col-sm-10">
+						<input name="size" class="form-control"onchange="show_cocomo()"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">PM&nbsp;:</label>
+					<div class="col-sm-10">
+						<input id="result" readonly class="form-control"/>
+					</div>
+				</div>
+			</div>
+			</form>
+		</div>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+		<style>
+			label{padding-top:7px;font-family:monospace;}
+			.SF{text-decoration:underline;}
+		</style>
+		<script>
+		var EM={
+		RELY : [0.75, 0.88, 1.00, 1.15, 1.39, null],
+		DATA : [null, 0.93, 1.00, 1.09, 1.19, null],
+		CPLX : [0.75, 0.88, 1.00, 1.15, 1.30, 1.66],
+		RUSE : [null, 0.91, 1.00, 1.14, 1.29, 1.49],
+		DOCU : [0.89, 0.95, 1.00, 1.06, 1.13, null],
+
+		TIME : [null, null, 1.00, 1.11, 1.31, 1.67],
+		STOR : [null, null, 1.00, 1.06, 1.21, 1.57],
+		PVOL : [null, 0.87, 1.00, 1.15, 1.30, null],
+
+		ACAP : [1.50, 1.22, 1.00, 0.83, 0.67, null],
+		PCAP : [1.37, 1.16, 1.00, 0.87, 0.74, null],
+		APEX : [1.22, 1.10, 1.00, 0.89, 0.81, null],
+		PLEX : [1.24, 1.10, 1.00, 0.92, 0.84, null],
+		LTEX : [1.25, 1.12, 1.00, 0.88, 0.81, null],
+		PCON : [1.24, 1.10, 1.00, 0.92, 0.84, null],
+
+		TOOL : [1.24, 1.12, 1.00, 0.86, 0.72, null],
+		SITE : [1.25, 1.10, 1.00, 0.92, 0.84, 0.78],
+		SCED : [1.29, 1.10, 1.00, 1.00, 1.00, null],
+		};
+		var SF=['PREC','FLEX','RESL','TEAM','PMAT'];
+		var sel=["Very Low","Low","Nominal","High","Very high","Extra High"];
+		
+		function obj2html(obj,grp){
+			return (obj.constructor==Object?Object.keys(obj):obj).map(function(a){
+				return '<div class="form-group">'+
+						'<label class="col-sm-2 control-label '+grp+'">'+a+'&nbsp;:</label>'+
+						'<div class="col-sm-10">'+
+						'<select class="form-control" name="'+a+'" onchange="show_cocomo()">'+
+						sel.map(function(a,i){return '<option value="'+i+'" '+(i==2?'selected':'')+'>'+a+'</option>';}).join('')+
+						'</select>'+
+					'</div></div>';
+			});
+		}
+		$('#SF').html(obj2html(SF,'SF').join(''));
+		$('#EM').html(obj2html(EM,'EM').join(''));
+		function getEM(){
+			var sum=1;
+			for(var em in EM){
+				var val=EM[em][$('[name="'+em+'"]').val()];
+				if(val===null)alert(em+': bad range');
+				sum*=val;
+			}
+			return sum;
+		}
+		function getSF(){
+			var sum=1.01;
+			for(var sf in SF)
+				sum+=0.01*(($('[name="'+SF[sf]+'"]').val()*1)+1);
+			return sum;
+		}
+		function show_cocomo(){
+			var a   = $('[name="a"]').val();
+			var size= eval($('[name="size"]').val()||0);
+			var b  = getSF();
+			var em  = getEM();
+			var PM  = a*Math.pow(size,b)*em;
+			$('#result').val(PM).attr({'title':'b='+b+'\n\u220f EM='+em});
+		}
+		function loadForm(){
+			var json=JSON.parse(localStorage.form);
+			for(var a in json)$('form [name="'+json[a].name+'"]').val(json[a].val);
+		}
+		
+		window.setInterval(function(){
+			localStorage.form=JSON.stringify($('form').find('[name]').map(
+				function(a){return{name:this.name,val:$(this).val()}}
+			))
+		},2000);
+		</script>
+	</body>
+</html>
