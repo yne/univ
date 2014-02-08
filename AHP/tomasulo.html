@@ -1,16 +1,44 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Tomasulo Algorithme</title>
+		<title>Tomasulo Algorithm</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 	</head>
 	<body>
-		<div id="page" class="container">
-			
+		<div class="container">
+		<div class="row" style="padding-bottom:1em;">
+			<div class="col-xs-12">
+				<button type="button" onclick="step()" class="btn btn-primary btn-lg btn-block">Process next step</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-4" data-table='{"id":"TL" ,"size":6,"cols":["N","TamponLoad"  ,"b"],"start":1}'></div>
+			<div class="col-xs-4" data-table='{"id":"OP" ,"size":6,"cols":["OPs"]}'></div>
+			<div class="col-xs-4" data-table='{"id":"REG","size":8,"cols":["#","FloatRegister","b"]}'></div>
+		</div>
+		<div class="row">
+			<div class="col-xs-4" data-table='{"id":"ADD","size":3,"cols":["N","#"," ","#"," ","b"],"start":9 }'></div>
+			<div class="col-xs-4" data-table='{"id":"MUL","size":2,"cols":["N","#"," ","#"," ","b"],"start":7 }'></div>
+			<div class="col-xs-4" data-table='{"id":"TS" ,"size":3,"cols":["N","TamponStore" ,"b"],"start":12}'></div>
 		</div>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+		<script src="tomasulo.js"></script>
+		<script>
+			$(function(){
+				$('[data-table]').each(TableCreate);
+				OP=[
+					{OPs:"ADDD F6,F8,F2"},
+					{OPs:"DIVD F10,F0,F6"},
+					{OPs:"SUBD F8,F6,F2"},
+					{OPs:"MULTD F0,F2,F4"},
+					{OPs:"LD F2,45(R3)"},
+					{OPs:"LD F6,34(R2)"},
+				];
+				TableUpdateAll();
+			});
+		</script>
+		<!--script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script-->
 		<script></script>
 	</body>
 </html>
