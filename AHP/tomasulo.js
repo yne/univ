@@ -31,8 +31,8 @@ var TablePush=function(){
 var handlers={
 	LD:function(src,dst){
 		console.log(arguments);
-//		TL.push(src);
-//		REG.push(dst);
+		var N=TamponLoad.push(src,2);
+		FloatRegister.push(N,dst);
 		this.addClass('success');
 	},
 	MULTD:function(){
