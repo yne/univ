@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Title</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<style type="text/css">
+			body { font-family: Sans-Serif; }
+			h1, h2, h3 {font-weight: lighter;}
+			img{width: 90%;}
+			.remark-slide{}
+			.remark-slide-content{
+				padding: 1em 2em;
+				font-size: 2em;
+			}
+		</style>
+	</head>
+	<body onload="remark.create()">
+		<pre id="source">
+
+class: center, middle
+# Real-Time Task Scheduling for Energy-Aware Embedded Systems
+
+Vishnu Swaminathan and Krishnendu Chakrabarty
+
+Dept. of Electrical & Computer Engineering
+
+Duke University
+
+~
+
+Rémy F.
+
+---
+
+# Plan
+
+* Rappels
+	- Contexte
+	- Economie d'energie
+	- Taches
+* LEDF
+	1. Présentation
+	2. Cas concret
+	3. Comparaison avec MILP
+	4. Experimentation
+
+---
+
+class: center, middle
+# Rappels
+
+---
+
+## Contexte
+
+De plus en plus d'appareils mobiles
+- Consomation d'energie = vital
+	- doivent etre économes en energie
+
+- Certains sont RT (transmeteurs / capteurs)
+	- contraintes RT primordial
+	- durée de vie importante
+
+---
+
+## Economie d'energie
+
+1. Structurer efficassement le materiel
+2. Diminuer finesse de gravure (Transistors)
+3. Diminuer voltage / Eteindre peripheriques si inutiles
+4. Diminuer voltage CPU en baisser la clock (cout?)
+5. Passer periodiquement en veille
+
+---
+
+## Taches
+
+- Periodique (**A**rrivée,**P**eriode,**D**eadline,**W**CET)
+	- Offline schedule
+	- Online schedule
+- Aperiodique (Exceptions)
+- Sporadique (P=intervale min)
+
+---
+
+class: center, middle
+# LEDF
+
+---
+
+## 1. Présentation
+
+Présente 2 algo de scheduling online (basé sur EDF).
+- EDF = optimal pour préemptif
+
+Relation energetique :
+- E(t) = V(t)^2 * D(t)
+
+Changement de clock couteux
+- LEDF = algo theorique
+- E-LEDF = algo pratique
+
+---
+
+Rapport Vitesse ~ Energie (PIC16F80)
+
+![](http://i.imgur.com/dk3kEwf.png)
+
+---
+
+### Algorithme :
+
+```C
+void LEDF(taches_list){
+	while(1){
+		if(taches_list.length)
+			taches_list.sort(by_deadlines,'ASC'),
+			schedule(taches_list[0]);//earliest deadline
+		else
+			break;
+	}
+}
+void scheduler_LEDF(task){
+	if(no_deadline_at(freq/2))
+		set_freq(freq/2);
+		LEDF(taches_list);
+	else if(no_deadline_at(freq))
+		set_freq(freq);
+		LEDF(taches_list);
+	/* task cannot be scheduled */
+	else
+		exception_handler();
+}
+```
+
+---
+
+## 2. Cas concret
+
+- on a 17 taches "t" a qui on associe D,A,W,P
+- CPU a 2 Voltages donc 2 vitesses (OS)
+- taches non préemptible
+- pas de temps mort
+
+Ordonnancement basse-energie = problème NP-complet.
+- => resolvable via "Mixed-Integer Linear Programming"
+
+
+---
+
+## 3. Mixed-Integer Linear Programming
+- Bonne estimation de la quatité minmum d'energie
+- On doit connaitre les WCET
+- Efficase si utilisé en offline 
+
+Mais :
+- Temps de calcule exponentiel
+- => Trés couteux si trop de taches (14+)
+
+---
+
+# Résultas
+
+MILP scheduling :
+![](http://i.imgur.com/9Lcl7YK.png)
+ELDF scheduling :
+![](http://i.imgur.com/bUvaJoY.png)
+
+---
+
+![](http://i.imgur.com/ex4fV7C.png)
+
+---
+
+# Résultas
+
+Différence en temps de calcul :
+
+- MILP, 18 taches : 1 jour
+- LEDF, 39 taches : &lt; 1 s.
+
+---
+
+# Bibliographie
+- http://ww1.microchip.com/downloads/en/devicedoc/30292c.pdf
+- http://www.sciencedirect.com/science/article/pii/S0016003201000217
+- http://ieeexplore.ieee.org/ielx5/43/34175/01629137.pdf
+- http://people.ee.duke.edu/~krish/wip.pdf
+    </pre>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js"></script>
+  </body>
+</html>
