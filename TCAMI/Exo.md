@@ -113,15 +113,15 @@ LRU
 | CACHE B1     |   | b | b | c | c | b | b | b | b | c | c | 
 
 1. Donner un synoptique général du cache a 2 emplacement et expliquer comment les bit LRU sont MAJ
-
-                 SRAM         DRAM
- ------         -------     --------- 
-|      |--+----| CACHE |---|         |
-|  UC  |  |     -------    | MEMOIRE |
-|      |  |      buffer    | CENTRAL |
- ------   +-----[B0|B1]----|         |
-                            ---------
- 
+```
+                     SRAM         DRAM
+     ------         -------     --------- 
+    |      |--+----| CACHE |---|         |
+    |  UC  |  |     -------    | MEMOIRE |
+    |      |  |      buffer    | CENTRAL |
+     ------   +-----[B0|B1]----|         |
+                                ---------
+```    	 
 2. Donner dans chaque cas et pour les référence de bloc considérés, la probabilité d’absence de l'information dans ce cache
 
 3. Reprendre le même problème avec 3 emplacement de bloc, Comparer les résultat et en tirer des conclusions
