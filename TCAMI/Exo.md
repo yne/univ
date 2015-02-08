@@ -24,13 +24,13 @@ Write Back (WB) = MAJ différée de la MC
 Write Throught with Write Allocate (WTWA) = MAJ en ligne de la MC avec chargement de bloc en cas de défaut a la fois sur L et E
 
 * h : proba de présence de l'info dans le cache
-* Wi: proba que la référence mémoire soit une écriture dans le cache
+* Wt: proba que la référence mémoire soit une écriture
 * Wm: proba pour que le bloc a remplacer dans le cache ait été modifié
 * b : nb de mot dans le bloc
 * tm: temps d’accès a la MC
 * tc: temps d’accès au cache
 
-Temps de transfert d'un bloc en lecture/MAJ = tm+b*tc
+Temps de transfert d'un bloc en lecture/MAJ = Tm+b*Tc
 
 1. Donner l'algo détaillé du fonctionnement des deux stratégies proposé en partant d'une demande de L ou E du proc
 
@@ -65,40 +65,37 @@ Write-through write :
 - ecrit dans le cache (Si deja présent en cache)
 - ecrit en memoire
 	
-2. Établir, pour chaque stratégie de gestion, le temps d’accès moyen a la hiérarchie de mémoire (cache,MC).
+2. Établir, pour chaque stratégie de gestion,
+le temps d’accès moyen a la hiérarchie de mémoire (cache,MC).
 Comparer les 2 stratégie lorsque h tend vers 0 et h tend vers 1
 
 Pour caulculer le temps total il faut faire la somme de toute les (Proba * Temps)
 
 Write through :
 
-| Branche        | Proba            | Temps de la branche   |
-|----------------|------------------|-----------------------|
-|  Read  & hit   |  (1–Wt) *    h   |  Tc                   |
-|  Read  & miss  |  (1–Wt) * (1–h)  |  (Tm + b * Tc) + Tc   |
-|  Write & hit   |     Wt  *    h   |  Tm + Tc              |
-|  Write & miss  |     Wt  * (1–h)  |  Tm                   |
+| Branche        | Proba            | Temps branche  |
+|----------------|------------------|----------------|
+|  Read  & hit   |  (1–Wt) *    h   |             Tc |
+|  Read  & miss  |  (1–Wt) * (1–h)  | (Tm+b*Tc) + Tc |
+|  Write & hit   |     Wt  *    h   |        Tm      |
+|  Write & miss  |     Wt  * (1–h)  |        Tm + Tc |
 
 Write Back :
 
 | Branche                 | Proba                          |Temps de la branche      |
 |-------------------------|--------------------------------|-------------------------|
 | Read  & hit             | (1–Wt) *    h                  |                      Tc |
-| Read  & miss & dirt     | (1–Wt) * (1–h) * Wm            | Tm + (Tm + b * Tc) + Tc |
+| Read  & miss & dirt     | (1–Wt) * (1–h) *    Wm         |  2 * (Tm + b * Tc) + Tc |
 | Read  & miss & no dirt  | (1–Wt) * (1–h) * (1–Wm)        |      (Tm + b * Tc) + Tc |
 | Write & hit             |    Wt  *    h                  |                      Tc |
-| Write & miss & dirt     |    Wt  * (1–h) * Wm            | Tm + (Tm + b * Tc) + Tc |
+| Write & miss & dirt     |    Wt  * (1–h) *    Wm         |  2 + (Tm + b * Tc) + Tc |
 | Write & miss & no dirt  |    Wt  * (1–h) * (1-Wm)        |      (Tm + b * Tc) + Tc |
 
-	Write-through // TODO
-	Taux de write*((chance de hit * temps de write la data vers le cache)+Temps de Write la data en RAM)
-	+Taux de read*(chance de miss*(Temp de recherche+temps de copie de la ram vers le cache) + temps de renvoyer la data)
+3. En prenant tc comme unité de temps, Wt=0.1, Wm=0.4, tm=4*tc et b=4
 
-	Write-back // TODO
-	Taux de write*(chance de hit + temps de write la data en cache)
-	+Taux de read*()
+4. Trouver la valeur de h pour laquelle les deux stratégies ont la même perf.
 
-3. En prenant tc comme unité de temps, Wi=0.1, Wm=0.4, tm=4*tc et b=4 , trouver la valeur de h pour laquelle les deux stratégies ont la même perf. En déduire la stratégie optimal en fonction de la taille du cache
+5. En déduire la stratégie optimal en fonction de la taille du cache
 
 Cache-Remplacement
 ==================
@@ -146,9 +143,11 @@ LRU
                             ---------
 ```
  
-2. Donner dans chaque cas et pour les référence de bloc considérés, la probabilité d’absence de l'information dans ce cache
+2. Donner dans chaque cas et pour les référence de bloc considérés,
+la probabilité d’absence de l'information dans ce cache
 
-3. Reprendre le même problème avec 3 emplacement de bloc, Comparer les résultat et en tirer des conclusions
+3. Reprendre le même problème avec 3 emplacement de bloc,
+Comparer les résultat et en tirer des conclusions
 
 ALEA
 ====
@@ -162,3 +161,5 @@ Interruption
 Concevoir le circuit de "daisy chain" qui existe au niveau d'un unité d'E/S de la chaine en lui ajoutant la logique nécessaire pour permettre a l'unité, si elle est prioritaire, de fournir un numéro de vecteur au moment de la reconnaissance d'interruption
 Ce circuit reçois en entré : un signal d'interruption provenant des circuit d'interfaces de l'unité elle même (noté IRQi) et le signal PI (entré de priorité/entré du daisi chaine)
 et fournit en sortie le signal PO (sortie de priorité/sortie du daisy chain), le domaine d'interruption, et le num de vecteur d'interruption
+
+![](http://www.cs.nyu.edu/courses/fall99/V22.0436-001/daisy-chain.png)
