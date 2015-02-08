@@ -68,13 +68,35 @@ Write-through write :
 2. Établir, pour chaque stratégie de gestion, le temps d’accès moyen a la hiérarchie de mémoire (cache,MC).
 Comparer les 2 stratégie lorsque h tend vers 0 et h tend vers 1
 
-Write-through // TODO
-Taux de write*((chance de hit * temps de write la data vers le cache)+Temps de Write la data en RAM)
-+Taux de read*(chance de miss*(Temp de recherche+temps de copie de la ram vers le cache) + temps de renvoyer la data)
+Pour caulculer le temps total il faut faire la somme de toute les (Proba * Temps)
 
-Write-back // TODO
-Taux de write*(chance de hit + temps de write la data en cache)
-+Taux de read*()
+Write through :
+
+| Branche        | Proba            | Temps de la branche   |
+|----------------|------------------|-----------------------|
+|  Read  & hit   |  (1–Wt) *    h   |  Tc                   |
+|  Read  & miss  |  (1–Wt) * (1–h)  |  (Tm + b * Tc) + Tc   |
+|  Write & hit   |     Wt  *    h   |  Tm + Tc              |
+|  Write & miss  |     Wt  * (1–h)  |  Tm                   |
+
+Write Back :
+
+| Branche                 | Proba                          |Temps de la branche      |
+|-------------------------|--------------------------------|-------------------------|
+| Read  & hit             | (1–Wt) *    h                  |                      Tc |
+| Read  & miss & dirt     | (1–Wt) * (1–h) * Wm            | Tm + (Tm + b * Tc) + Tc |
+| Read  & miss & no dirt  | (1–Wt) * (1–h) * (1–Wm)        |      (Tm + b * Tc) + Tc |
+| Write & hit             |    Wt  *    h                  |                      Tc |
+| Write & miss & dirt     |    Wt  * (1–h) * Wm            | Tm + (Tm + b * Tc) + Tc |
+| Write & miss & no dirt  |    Wt  * (1–h) * (1-Wm)        |      (Tm + b * Tc) + Tc |
+
+	Write-through // TODO
+	Taux de write*((chance de hit * temps de write la data vers le cache)+Temps de Write la data en RAM)
+	+Taux de read*(chance de miss*(Temp de recherche+temps de copie de la ram vers le cache) + temps de renvoyer la data)
+
+	Write-back // TODO
+	Taux de write*(chance de hit + temps de write la data en cache)
+	+Taux de read*()
 
 3. En prenant tc comme unité de temps, Wi=0.1, Wm=0.4, tm=4*tc et b=4 , trouver la valeur de h pour laquelle les deux stratégies ont la même perf. En déduire la stratégie optimal en fonction de la taille du cache
 
@@ -113,15 +135,17 @@ LRU
 | CACHE B1     |   | b | b | c | c | b | b | b | b | c | c | 
 
 1. Donner un synoptique général du cache a 2 emplacement et expliquer comment les bit LRU sont MAJ
+
 ```
-                     SRAM         DRAM
-     ------         -------     --------- 
-    |      |--+----| CACHE |---|         |
-    |  UC  |  |     -------    | MEMOIRE |
-    |      |  |      buffer    | CENTRAL |
-     ------   +-----[B0|B1]----|         |
-                                ---------
-```    	 
+                 SRAM         DRAM
+ ------         -------     --------- 
+|      |--+----| CACHE |---|         |
+|  UC  |  |     -------    | MEMOIRE |
+|      |  |      buffer    | CENTRAL |
+ ------   +-----[B0|B1]----|         |
+                            ---------
+```
+ 
 2. Donner dans chaque cas et pour les référence de bloc considérés, la probabilité d’absence de l'information dans ce cache
 
 3. Reprendre le même problème avec 3 emplacement de bloc, Comparer les résultat et en tirer des conclusions
