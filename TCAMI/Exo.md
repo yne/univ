@@ -34,37 +34,15 @@ Temps de transfert d'un bloc en lecture/MAJ = Tm+b*Tc
 
 1. Donner l'algo détaillé du fonctionnement des deux stratégies proposé en partant d'une demande de L ou E du proc
 
+Write Back
+----------
 ![sgv](https://upload.wikimedia.org/wikipedia/commons/c/c2/Write-back_with_write-allocation.svg)
 
-Write-back read:
-- si présent en cache : renvoi la donnée. fin.
-- sinon
-- cherche un bloc de cache a utiliser
-- (si ce block est flagé "modifié")=> ecrit la précédente donnée dans la RAM
-- Copie le bloc depuis la RAM vers le cache
-- Marque le bloc en cache comme "non modifié"
-- renvoi la donnée
-
-Write-back write :
-- Si present en cache => re-ecrit la donnée en cache et la flag "modifié"
-- sinon
-- trouve un bloc a utiliser
-- (si block flagé comme "modifié")=>renvoi en RAM la donnée précédement stoquée
-- rapatrie de la RAM vers le cache la donnée
-- flag la donnée comme "modifiée"
-
+Write Through
+----------
 ![sgv](https://upload.wikimedia.org/wikipedia/commons/0/04/Write-through_with_no-write-allocation.svg)
 
-Write-through read:
-- si présent en cache : renvois directement la reponse depuis le cache.fin.
-- cherche dans le cache un block a utiliser
-- charge depuis la MC dans ce block
-- renvoi la donnée.
 
-Write-through write :
-- ecrit dans le cache (Si deja présent en cache)
-- ecrit en memoire
-	
 2. Établir, pour chaque stratégie de gestion,
 le temps d’accès moyen a la hiérarchie de mémoire (cache,MC).
 Comparer les 2 stratégie lorsque h tend vers 0 et h tend vers 1
@@ -153,6 +131,7 @@ ALEA
 ====
 
 1. Donner les différents type de déroulement pouvant survenir au niveau de chaque étage du pipeline du R3000
+
 - interruption
 - modification de TLB. Cette exception est levée lorsque que l’adresse virtuelle d’une écriture correspond à une entrée de la TLB marqué non-inscriptible
 - rechargement de la TLB. Indique que le système d’exploitation doit recharger la TLB pour effectuer une lecture/écriture
@@ -166,7 +145,9 @@ ALEA
 
 2. Donner la définition d'une "exception précise"
 
+
 Exception précise :
+--------------------
 
 An interrupt or exception is called precise if the saved processor state corresponds with the sequential model of program execution where one instruction execution ends before the next begins.
 Precise exception means that all instructions before the faulting instruction are committed and those after it can be restarted from scratch.
@@ -174,12 +155,27 @@ If an interrupt occurred, all instructions that are in program order before the 
 Depending on the architecture and the type of exception, the faulting instruction should be committed or removed without any lasting effect.
 
 Interruptions précises :
+-----------------------
 
 An interrupt that leaves the machine in a well-defined state is called a precise interrupt. Such an interrupt has four properties:
 - The Program Counter (PC) is saved in a known place.
 - All instructions before the one pointed to by the PC have fully executed.
 - No instruction beyond the one pointed to by the PC has been executed (that is no prohibition on instruction beyond that in PC, it is just that any changes they make to registers or memory must be undone before the interrupt happens).
 - The execution state of the instruction pointed to by the PC is known.
+
+Type de déroutement :
+--------------------
+
+- interruption
+- (ME) modification de TLB. Cette exception est levée lorsque que l’adresse virtuelle d’une écriture correspond à une entrée de la TLB marqué non-inscriptible
+- (ME) rechargement de la TLB. Indique que le système d’exploitation doit recharger la TLB pour effectuer une lecture/écriture
+- (EI/ME) erreur d’adressage lors de la lecture d’une Donnée/Instruction ou de l'ecriture d’une donnée
+- (EI) erreur lors d’un accès mémoire pour la lecture d’une instruction ou de la L/E d’une donnée
+- (DI) instruction inconnue (ou réservée)
+- (EX) appel système
+- (EX) point d’arrêt
+- (EX) tentative avortée d’accès à un coprocesseur
+- (EX) dépassement de capacité lors d’un calcul arithmétique
 
 3. Expliquer comment fonction la solution fondée sur le vecteur de présence d’exception associé a chaque instruction pour rendre les exception précise ?
 
