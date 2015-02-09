@@ -153,7 +153,34 @@ ALEA
 ====
 
 1. Donner les différents type de déroulement pouvant survenir au niveau de chaque étage du pipeline du R3000
+- interruption
+- modification de TLB. Cette exception est levée lorsque que l’adresse virtuelle d’une écriture correspond à une entrée de la TLB marqué non-inscriptible
+- rechargement de la TLB. Indique que le système d’exploitation doit recharger la TLB pour effectuer une lecture/écriture
+- erreur d’adressage lors de la lecture d’une Donnée/Instruction ou de l'ecriture d’une donnée
+- erreur lors d’un accès mémoire pour la lecture d’une instruction ou de la L/E d’une donnée
+- appel système
+- point d’arrêt
+- instruction inconnue (ou réservée)
+- tentative avortée d’accès à un coprocesseur
+- dépassement de capacité lors d’un calcul arithmétique
+
 2. Donner la définition d'une "exception précise"
+
+Exception précise :
+
+An interrupt or exception is called precise if the saved processor state corresponds with the sequential model of program execution where one instruction execution ends before the next begins.
+Precise exception means that all instructions before the faulting instruction are committed and those after it can be restarted from scratch.
+If an interrupt occurred, all instructions that are in program order before the interrupt signaling instruction are committed, and all later instructions are removed.
+Depending on the architecture and the type of exception, the faulting instruction should be committed or removed without any lasting effect.
+
+Interruptions précises :
+
+An interrupt that leaves the machine in a well-defined state is called a precise interrupt. Such an interrupt has four properties:
+- The Program Counter (PC) is saved in a known place.
+- All instructions before the one pointed to by the PC have fully executed.
+- No instruction beyond the one pointed to by the PC has been executed (that is no prohibition on instruction beyond that in PC, it is just that any changes they make to registers or memory must be undone before the interrupt happens).
+- The execution state of the instruction pointed to by the PC is known.
+
 3. Expliquer comment fonction la solution fondée sur le vecteur de présence d’exception associé a chaque instruction pour rendre les exception précise ?
 
 Interruption
