@@ -34,27 +34,15 @@ Temps de transfert d'un bloc en lecture/MAJ = Tm+b*Tc
 
 1. Donner l'algo détaillé du fonctionnement des deux stratégies proposé en partant d'une demande de L ou E du proc
 
+Write Back
+----------
 ![sgv](https://upload.wikimedia.org/wikipedia/commons/c/c2/Write-back_with_write-allocation.svg)
 
-Write-back read:
-- si présent en cache : renvoi la donnée. fin.
-- sinon
-- cherche un bloc de cache a utiliser
-- (si ce block est flagé "modifié")=> ecrit la précédente donnée dans la RAM
-- Copie le bloc depuis la RAM vers le cache
-- Marque le bloc en cache comme "non modifié"
-- renvoi la donnée
-
-Write-back write :
-- Si present en cache => re-ecrit la donnée en cache et la flag "modifié"
-- sinon
-- trouve un bloc a utiliser
-- (si block flagé comme "modifié")=>renvoi en RAM la donnée précédement stoquée
-- rapatrie de la RAM vers le cache la donnée
-- flag la donnée comme "modifiée"
-
+Write Through
+----------
 ![sgv](https://upload.wikimedia.org/wikipedia/commons/0/04/Write-through_with_no-write-allocation.svg)
 
+<<<<<<< HEAD:TCAMI/Avance.md
 Write-through read:
 - si présent en cache : renvois directement la reponse depuis le cache.fin.
 - cherche dans le cache un block a utiliser
@@ -65,11 +53,15 @@ Write-through write :
 - ecrit dans le cache (Si deja présent en cache)
 - ecrit en memoire
 	
+=======
+
+>>>>>>> aac75831e06ba837750fcc82b3f4cf3c0f3d4e6c:TCAMI/Exo.md
 2. Établir, pour chaque stratégie de gestion,
 le temps d’accès moyen a la hiérarchie de mémoire (cache,MC).
 Comparer les 2 stratégie lorsque h tend vers 0 et h tend vers 1
 
 Pour caulculer le temps total il faut faire la somme de toute les (Proba * Temps)
+<<<<<<< HEAD:TCAMI/Avance.md
 
 Write through :
 
@@ -91,6 +83,29 @@ Write Back :
 | Write & miss & dirt     |    Wt  * (1–h) *    Wm         |  2 + (Tm + b * Tc) + Tc |
 | Write & miss & no dirt  |    Wt  * (1–h) * (1-Wm)        |      (Tm + b * Tc) + Tc |
 
+=======
+
+Write through :
+
+| Branche        | Proba            | Temps branche  |
+|----------------|------------------|----------------|
+|  Read  & hit   |  (1–Wt) *    h   |             Tc |
+|  Read  & miss  |  (1–Wt) * (1–h)  | (Tm+b*Tc) + Tc |
+|  Write & hit   |     Wt  *    h   |        Tm      |
+|  Write & miss  |     Wt  * (1–h)  |        Tm + Tc |
+
+Write Back :
+
+| Branche                 | Proba                          |Temps de la branche      |
+|-------------------------|--------------------------------|-------------------------|
+| Read  & hit             | (1–Wt) *    h                  |                      Tc |
+| Read  & miss & dirt     | (1–Wt) * (1–h) *    Wm         |  2 * (Tm + b * Tc) + Tc |
+| Read  & miss & no dirt  | (1–Wt) * (1–h) * (1–Wm)        |      (Tm + b * Tc) + Tc |
+| Write & hit             |    Wt  *    h                  |                      Tc |
+| Write & miss & dirt     |    Wt  * (1–h) *    Wm         |  2 + (Tm + b * Tc) + Tc |
+| Write & miss & no dirt  |    Wt  * (1–h) * (1-Wm)        |      (Tm + b * Tc) + Tc |
+
+>>>>>>> aac75831e06ba837750fcc82b3f4cf3c0f3d4e6c:TCAMI/Exo.md
 3. En prenant tc comme unité de temps, Wt=0.1, Wm=0.4, tm=4*tc et b=4
 
 4. Trouver la valeur de h pour laquelle les deux stratégies ont la même perf.
@@ -153,7 +168,49 @@ ALEA
 ====
 
 1. Donner les différents type de déroulement pouvant survenir au niveau de chaque étage du pipeline du R3000
+
+- interruption
+- modification de TLB. Cette exception est levée lorsque que l’adresse virtuelle d’une écriture correspond à une entrée de la TLB marqué non-inscriptible
+- rechargement de la TLB. Indique que le système d’exploitation doit recharger la TLB pour effectuer une lecture/écriture
+- erreur d’adressage lors de la lecture d’une Donnée/Instruction ou de l'ecriture d’une donnée
+- erreur lors d’un accès mémoire pour la lecture d’une instruction ou de la L/E d’une donnée
+- appel système
+- point d’arrêt
+- instruction inconnue (ou réservée)
+- tentative avortée d’accès à un coprocesseur
+- dépassement de capacité lors d’un calcul arithmétique
+
 2. Donner la définition d'une "exception précise"
+
+
+### Exception précise :
+
+An interrupt or exception is called precise if the saved processor state corresponds with the sequential model of program execution where one instruction execution ends before the next begins.
+Precise exception means that all instructions before the faulting instruction are committed and those after it can be restarted from scratch.
+If an interrupt occurred, all instructions that are in program order before the interrupt signaling instruction are committed, and all later instructions are removed.
+Depending on the architecture and the type of exception, the faulting instruction should be committed or removed without any lasting effect.
+
+### Interruptions précises :
+
+An interrupt that leaves the machine in a well-defined state is called a precise interrupt. Such an interrupt has four properties:
+- The Program Counter (PC) is saved in a known place.
+- All instructions before the one pointed to by the PC have fully executed.
+- No instruction beyond the one pointed to by the PC has been executed (that is no prohibition on instruction beyond that in PC, it is just that any changes they make to registers or memory must be undone before the interrupt happens).
+- The execution state of the instruction pointed to by the PC is known.
+
+### Type de déroutement :
+
+- interruption
+- (ME) modification de TLB. Cette exception est levée lorsque que l’adresse virtuelle d’une écriture correspond à une entrée de la TLB marqué non-inscriptible
+- (ME) rechargement de la TLB. Indique que le système d’exploitation doit recharger la TLB pour effectuer une lecture/écriture
+- (EI/ME) erreur d’adressage lors de la lecture d’une Donnée/Instruction ou de l'ecriture d’une donnée
+- (EI) erreur lors d’un accès mémoire pour la lecture d’une instruction ou de la L/E d’une donnée
+- (DI) instruction inconnue (ou réservée)
+- (EX) appel système
+- (EX) point d’arrêt
+- (EX) tentative avortée d’accès à un coprocesseur
+- (EX) dépassement de capacité lors d’un calcul arithmétique
+
 3. Expliquer comment fonction la solution fondée sur le vecteur de présence d’exception associé a chaque instruction pour rendre les exception précise ?
 
 Interruption
