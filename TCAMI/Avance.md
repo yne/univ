@@ -42,26 +42,11 @@ Write Through
 ----------
 ![sgv](https://upload.wikimedia.org/wikipedia/commons/0/04/Write-through_with_no-write-allocation.svg)
 
-<<<<<<< HEAD:TCAMI/Avance.md
-Write-through read:
-- si présent en cache : renvois directement la reponse depuis le cache.fin.
-- cherche dans le cache un block a utiliser
-- charge depuis la MC dans ce block
-- renvoi la donnée.
-
-Write-through write :
-- ecrit dans le cache (Si deja présent en cache)
-- ecrit en memoire
-	
-=======
-
->>>>>>> aac75831e06ba837750fcc82b3f4cf3c0f3d4e6c:TCAMI/Exo.md
 2. Établir, pour chaque stratégie de gestion,
 le temps d’accès moyen a la hiérarchie de mémoire (cache,MC).
 Comparer les 2 stratégie lorsque h tend vers 0 et h tend vers 1
 
 Pour caulculer le temps total il faut faire la somme de toute les (Proba * Temps)
-<<<<<<< HEAD:TCAMI/Avance.md
 
 Write through :
 
@@ -83,29 +68,6 @@ Write Back :
 | Write & miss & dirt     |    Wt  * (1–h) *    Wm         |  2 + (Tm + b * Tc) + Tc |
 | Write & miss & no dirt  |    Wt  * (1–h) * (1-Wm)        |      (Tm + b * Tc) + Tc |
 
-=======
-
-Write through :
-
-| Branche        | Proba            | Temps branche  |
-|----------------|------------------|----------------|
-|  Read  & hit   |  (1–Wt) *    h   |             Tc |
-|  Read  & miss  |  (1–Wt) * (1–h)  | (Tm+b*Tc) + Tc |
-|  Write & hit   |     Wt  *    h   |        Tm      |
-|  Write & miss  |     Wt  * (1–h)  |        Tm + Tc |
-
-Write Back :
-
-| Branche                 | Proba                          |Temps de la branche      |
-|-------------------------|--------------------------------|-------------------------|
-| Read  & hit             | (1–Wt) *    h                  |                      Tc |
-| Read  & miss & dirt     | (1–Wt) * (1–h) *    Wm         |  2 * (Tm + b * Tc) + Tc |
-| Read  & miss & no dirt  | (1–Wt) * (1–h) * (1–Wm)        |      (Tm + b * Tc) + Tc |
-| Write & hit             |    Wt  *    h                  |                      Tc |
-| Write & miss & dirt     |    Wt  * (1–h) *    Wm         |  2 + (Tm + b * Tc) + Tc |
-| Write & miss & no dirt  |    Wt  * (1–h) * (1-Wm)        |      (Tm + b * Tc) + Tc |
-
->>>>>>> aac75831e06ba837750fcc82b3f4cf3c0f3d4e6c:TCAMI/Exo.md
 3. En prenant tc comme unité de temps, Wt=0.1, Wm=0.4, tm=4*tc et b=4
 
 4. Trouver la valeur de h pour laquelle les deux stratégies ont la même perf.
