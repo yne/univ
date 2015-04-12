@@ -1,0 +1,1 @@
+@tcc -Wall -run main.c 160 90 img.bmp
