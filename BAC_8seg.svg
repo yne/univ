@@ -1,0 +1,148 @@
+<svg id="svgElem" width="400" height="256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<linearGradient id="rouge" x1="0%" y1="0%" x2="0%" y2="100%"><stop style="stop-color:rgb(32,0,0);" offset="0%"/><stop style="stop-color:rgb(96,0,0);" offset="50%"/><stop style="stop-color:rgb(32,0,0);" offset="100%"/></linearGradient>
+<linearGradient id="bg"    x1="50%" y1="0" x2="50%" y2="100%"><stop offset="0%"  stop-color="rgb(0,0,20)" stop-opacity=".8"/><stop offset="100%" stop-color="rgb(200,200,256)" stop-opacity=".8"/></linearGradient> 
+<linearGradient id="hlt"   x1="50%" y1="0" x2="50%" y2="100%"><stop offset="0%"  stop-color="white" stop-opacity="1"/><stop offset="90%" stop-color="white" stop-opacity="0"/></linearGradient> 
+<linearGradient id="hlb"   x1="50%" y1="0" x2="50%" y2="100%"><stop offset="20%" stop-color="white" stop-opacity="0"/><stop offset="100%" stop-color="white" stop-opacity="1"/></linearGradient> 
+<filter id="gblur"><feGaussianBlur stdDeviation="2"/></filter>
+<rect id="bt" x="0" y="0" rx="25" ry="25" width="100" height="50"/> 
+<symbol id="btn" viewBox="-5 -5 110 60" preserveAspectRatio="none" > 
+	<use xlink:href="#bt" fill="url(#bg)" /> 
+	<use transform="scale(.8, .45) translate(12,4)" xlink:href="#bt"  fill="url(#hlt)"/> 
+	<use transform="scale(.8, .45) translate(12,57)" filter="url(#gblur)" xlink:href="#bt" fill="url(#hlb)"/> 
+</symbol>
+</defs>
+<g transform="translate(0 0)">
+	<rect x="0" y="0" width="400" height="150" fill="black"/>
+	<rect x="1" y="1" width="398" height="148" style="fill:url(#rouge)"/>
+</g>
+<g id="disp" transform="translate(0 0)">
+<g transform="translate(0 0)"> 
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'10')" onmouseover="this.style.cssText+=styleDelOver" points="15,5   85,5   90,10  85,15  15,15  10,10 " fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'11')" onmouseover="this.style.cssText+=styleDelOver" points="90,10  95,15  95,70  90,75  85,70  85,15"  fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'12')" onmouseover="this.style.cssText+=styleDelOver" points="90,75  95,80  95,135 90,140 85,135 85,80"  fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'13')" onmouseover="this.style.cssText+=styleDelOver" points="15,135 85,135 90,140 85,145 15,145 10,140" fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'14')" onmouseover="this.style.cssText+=styleDelOver" points="10,75  15,80  15,135 10,140  5,135  5,80"  fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'15')" onmouseover="this.style.cssText+=styleDelOver" points="10,10  15,15  15,70  10,75   5,70   5,15"  fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'16')" onmouseover="this.style.cssText+=styleDelOver" points="15,70  85,70  90,75  85,80  15,80  10,75 " fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<circle  onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'17')" onmouseover="this.style.cssText+=styleDelOver" cx="79" cy="129" r="5"                             fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+</g>
+<g transform="translate(100 0)"> 
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'20')" onmouseover="this.style.cssText+=styleDelOver" points="15,5   85,5   90,10  85,15  15,15  10,10 " fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'21')" onmouseover="this.style.cssText+=styleDelOver" points="90,10  95,15  95,70  90,75  85,70  85,15"  fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'22')" onmouseover="this.style.cssText+=styleDelOver" points="90,75  95,80  95,135 90,140 85,135 85,80"  fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'23')" onmouseover="this.style.cssText+=styleDelOver" points="15,135 85,135 90,140 85,145 15,145 10,140" fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'24')" onmouseover="this.style.cssText+=styleDelOver" points="10,75  15,80  15,135 10,140  5,135  5,80"  fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'25')" onmouseover="this.style.cssText+=styleDelOver" points="10,10  15,15  15,70  10,75   5,70   5,15"  fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'26')" onmouseover="this.style.cssText+=styleDelOver" points="15,70  85,70  90,75  85,80  15,80  10,75 " fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<circle  onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'27')" onmouseover="this.style.cssText+=styleDelOver" cx="79" cy="129" r="5"                             fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+</g>
+<g transform="translate(200 0)"> 
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'30')" onmouseover="this.style.cssText+=styleDelOver" points="15,5   85,5   90,10  85,15  15,15  10,10 " fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'31')" onmouseover="this.style.cssText+=styleDelOver" points="90,10  95,15  95,70  90,75  85,70  85,15"  fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'32')" onmouseover="this.style.cssText+=styleDelOver" points="90,75  95,80  95,135 90,140 85,135 85,80"  fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'33')" onmouseover="this.style.cssText+=styleDelOver" points="15,135 85,135 90,140 85,145 15,145 10,140" fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'34')" onmouseover="this.style.cssText+=styleDelOver" points="10,75  15,80  15,135 10,140  5,135  5,80"  fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'35')" onmouseover="this.style.cssText+=styleDelOver" points="10,10  15,15  15,70  10,75   5,70   5,15"  fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'36')" onmouseover="this.style.cssText+=styleDelOver" points="15,70  85,70  90,75  85,80  15,80  10,75 " fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<circle  onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'37')" onmouseover="this.style.cssText+=styleDelOver" cx="79" cy="129" r="5"                             fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+</g>
+<g transform="translate(300 0)"> 
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'40')" onmouseover="this.style.cssText+=styleDelOver" points="15,5   85,5   90,10  85,15  15,15  10,10 " fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'41')" onmouseover="this.style.cssText+=styleDelOver" points="90,10  95,15  95,70  90,75  85,70  85,15"  fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'42')" onmouseover="this.style.cssText+=styleDelOver" points="90,75  95,80  95,135 90,140 85,135 85,80"  fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'43')" onmouseover="this.style.cssText+=styleDelOver" points="15,135 85,135 90,140 85,145 15,145 10,140" fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'44')" onmouseover="this.style.cssText+=styleDelOver" points="10,75  15,80  15,135 10,140  5,135  5,80"  fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'45')" onmouseover="this.style.cssText+=styleDelOver" points="10,10  15,15  15,70  10,75   5,70   5,15"  fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<polygon onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'46')" onmouseover="this.style.cssText+=styleDelOver" points="15,70  85,70  90,75  85,80  15,80  10,75 " fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+	<circle  onmouseout="this.style.cssText+=styleDelOut" onclick="gs(this,'47')" onmouseover="this.style.cssText+=styleDelOver" cx="79" cy="129" r="5"                             fill="#FF0000" stroke="#FF4444" stroke-width="1" cursor="pointer"/>
+</g>
+</g>
+<g transform="translate(0, 150)" onclick="stuf(prompt('entrer la serie de bit du bus DATA\n(le bit le plus recent a droite)'))" cursor="pointer">
+	<use xlink:href="#btn" width="100" height="50" x="0" y="0"/>
+	<text x="17" y="32" font-size="25" fill="#FF0000" align="center">DATA</text>
+</g>
+<g transform="translate(0, 200)" onclick="reset()" cursor="pointer">
+	<use xlink:href="#btn" width="100" height="50" x="0" y="0"/>
+	<text x="25" y="32" font-size="25" fill="black" align="center">reset</text>
+</g>
+<g transform="translate(120,170)">
+<rect x="0" y="-18" width="16" height="80" fill="#AAAAFF" />
+<rect x="16" y="-18" width="48" height="80" fill="#EEEEEE" />
+<rect x="64" y="-18" width="15" height="80" fill="#FFAAAA" />
+<rect x="80" y="-18" width="16" height="80" fill="#AAFFAA" />
+<rect x="97" y="-18" width="32" height="80" fill="#FFAAAA" />
+<rect x="128" y="-18" width="16" height="80" fill="#AAFFAA" />
+<rect x="144" y="-18" width="16" height="80" fill="#FFAAAA" />
+<rect x="160" y="-18" width="30" height="80" fill="#AAFFAA" />
+<rect x="190" y="-18" width="70" height="80" fill="#FFAAAA" />
+
+
+<text id="aff1" x="0" y="0"  style="font:26px Courrier,monospace;" onmouseover="this.style.fontWeight='bold'" onmouseout="this.style.fontWeight='normal';">0111000010110000</text>
+<text id="aff2" x="0" y="20" style="font:26px Courrier,monospace;" onmouseover="this.style.fontWeight='bold'" onmouseout="this.style.fontWeight='normal';">0111010000110000</text>
+<text id="aff3" x="0" y="40" style="font:26px Courrier,monospace;" onmouseover="this.style.fontWeight='bold'" onmouseout="this.style.fontWeight='normal';">0111010010010000</text>
+<text id="aff4" x="0" y="60" style="font:26px Courrier,monospace;" onmouseover="this.style.fontWeight='bold'" onmouseout="this.style.fontWeight='normal';">0111010010100000</text>
+<text x="0" y="80" style="font:26px Courrier,monospace;">G___B4FE3A21GDC.</text>
+</g>
+<script>
+<![CDATA[
+
+var disp = document.getElementById('disp');
+function reset(){
+//window.location.reload();
+var x,y;
+for(x=0;x!=4;x++){
+	for(y=0;y!=8;y++){
+		disp.children[x].children[y].style.cssText+="fill: transparent;";
+	}
+}
+}
+var styleDelOver = "stroke-width: 2; stroke: rgb(255, 255, 255);";
+var styleDelOut  = "stroke-width: 1; stroke: rgb(255, 68, 68);";
+function stuf(bits){
+	bits.replace(' ','');
+	if(bits.match(/[^01]/g)){
+		alert('erreur:votre chaine ne doit contenir que des 0 et des 1');
+		return;
+	}
+	if(bits.length==16){
+		var bits=bits.substring(4,16);
+	}
+	if(bits.length!=12){
+		alert("nombre de bit incorrect:\nvous avez saisi : "+bits.length+" bits\n alors qu'il faut : 16 bits");
+		return;
+	}
+	var disp = bits[1]*8+bits[4]*4+bits[6]*2+bits[7]*1;
+	if(bits[1]==0)display(3,bits);
+	if(bits[4]==0)display(2,bits);
+	if(bits[6]==0)display(1,bits);
+	if(bits[7]==0)display(0,bits);
+}
+var bitToChild=[1,-1,5,4,-1,0,-1,-1,6,3,2,7];
+function display(n,bits){
+	var i;
+	aff=disp.children[n];
+	for(i=0;i!=12;i++){
+		if(bitToChild[i]==-1)continue;
+		if(bits[i] =="0")aff.children[bitToChild[i]].style.cssText+="fill: rgb(255,0,0);";
+	}
+}
+function gs(o,id){
+var off = o.style.cssText.lastIndexOf('fill: rgb(255, 0, 0)');
+if(off==-1){o.style.cssText+="fill: rgb(255,0,0);"
+}else if(off==0){o.style.cssText+="fill: transparent;"
+}else{return}
+var txt=document.getElementById("aff"+id[0]);
+var ChildToBit=[9,4,14,13,7,6,12,15];
+txt.textContent=txt.textContent.substring(0,ChildToBit[id[1]])+''+(-off)+''+txt.textContent.substring(ChildToBit[id[1]]+1)
+}
+setTimeout("reset()",1000);
+]]>
+</script>
+</svg>
+<!--
+SVG 8seg displayer
+by biscottealacevette
+thx2HPS4hlp
+tested with firefox (3.6 & 3.7a)
+-->
